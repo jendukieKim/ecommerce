@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Titles with Count</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        #title-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        #title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        #count-info {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        #generate-btn {
+            padding: 10px 20px;
+            background-color: #50c0f0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #generate-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div id="title-container">
+        <div id="title">Click the button to generate a title</div>
+        <div id="count-info">Question 0 of 18</div>
+        <button id="generate-btn">Generate Title</button>
+    </div>
+
+    <script>
+        const titles = [
+            "Infrastructure-as-a-Service",
+            "Platform-as-a-Service",
+            "Benefits of SaaS",
+            "Privacy and Trust in E-commerce",
+            "Why personal data are valuable for digital business?",
+            "Data Subject",
+            "Data Controller",
+            "Personal Data",
+            "What is digital business strategy?",
+            "Eight keys digital business strategic decision.",
+            "Difference between Upstream supply chain and Inbound logistics",
+            "Problem of Supply chain management",
+            "SOSTAC",
+            "Describe two types of buying methods",
+            "Online value proposition",
+            "How do different types of information system cover different parts of the procurement cycle?",
+            "The three types of customer data",
+            "From monologue to dialogue"
+        ];
+        let usedTitles = [];
+        const totalQuestions = titles.length;
+        let currentCount = 0;
+
+        document.getElementById('generate-btn').addEventListener('click', function() {
+            if (titles.length === 0) {
+                document.getElementById('title').innerText = "No more titles!";
+                this.disabled = true;
+                return;
+            }
+
+            // Generate a random index from the remaining titles
+            const randomIndex = Math.floor(Math.random() * titles.length);
+            const selectedTitle = titles.splice(randomIndex, 1)[0];
+
+            // Display the selected title
+            document.getElementById('title').innerText = selectedTitle;
+
+            // Increment the current count
+            currentCount++;
+
+            // Update the count info
+            document.getElementById('count-info').innerText = `Question ${currentCount} of ${totalQuestions}`;
+
+            // Add the selected title to the usedTitles array
+            usedTitles.push(selectedTitle);
+        });
+    </script>
+</body>
+</html>
